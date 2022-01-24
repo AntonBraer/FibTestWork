@@ -2,7 +2,8 @@ package fibgrpc
 
 import (
 	"context"
-	"fbsTest/internal/api/grpc/proto"
+	"fbsTest/config"
+	fib "fbsTest/internal/api/grpc/proto"
 	"fbsTest/internal/service"
 	"net"
 
@@ -30,8 +31,8 @@ func (s *ServerGRPC) GetFibSeq(ctx context.Context, req *fib.FibRequest) (*fib.F
 	return &fib.FibResponse{Res: res}, nil
 }
 
-func (s *ServerGRPC) Run(serv *grpc.Server) error {
-	listener, err := net.Listen("tcp", ":8081")
+func (s *ServerGRPC) Run(serv *grpc.Server, cfg config.Config) error {
+	listener, err := net.Listen("tcp", ":"+cfg.GrpcPort)
 	if err != nil {
 		return err
 	}

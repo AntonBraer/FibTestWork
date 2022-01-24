@@ -54,7 +54,7 @@ func main() {
 	grpcServer := grpc.NewServer([]grpc.ServerOption{}...)
 	fibGrpcServer := fibgrpc.NewServer(*fibService)
 	go func() {
-		if err := fibGrpcServer.Run(grpcServer); err != nil {
+		if err := fibGrpcServer.Run(grpcServer, config); err != nil {
 			log.Println("GRPC server run error:", err)
 		}
 	}()
