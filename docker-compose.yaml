@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  redis:
+    image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - '6379:6379'
+    network_mode: host
+
+  app:
+    depends_on:
+      - redis
+    build: .
+    ports:
+      - '8080:8080'
+      - '8081:8081'
+    network_mode: host

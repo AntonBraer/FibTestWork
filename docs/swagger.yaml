@@ -1,0 +1,60 @@
+basePath: /
+definitions:
+  api.errorResponse:
+    properties:
+      code:
+        type: integer
+      error:
+        type: string
+    type: object
+  api.getFibRequest:
+    properties:
+      end:
+        type: integer
+      start:
+        type: integer
+    type: object
+  api.getFibResponse:
+    properties:
+      sequence:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: FBS test work.
+  title: Fibonacci
+  version: "1.0"
+paths:
+  /getFib:
+    post:
+      consumes:
+      - application/json
+      description: get Fibonacci sequence
+      operationId: get-fib
+      parameters:
+      - description: start and end
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/api.getFibRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.getFibResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.errorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/api.errorResponse'
+      summary: getFib
+      tags:
+      - fib
+swagger: "2.0"
