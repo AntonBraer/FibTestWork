@@ -6,6 +6,7 @@ import (
 	"github.com/swaggo/gin-swagger/swaggerFiles"
 )
 
+// InitRouter иницилизируем роутер
 func (s *Server) InitRouter() {
 	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()

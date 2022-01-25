@@ -13,6 +13,7 @@ type Server struct {
 	service *service.FibService
 }
 
+// NewServer создает сервер
 func NewServer(service *service.FibService, config config.Config) *Server {
 	return &Server{
 		service: service,
@@ -20,6 +21,7 @@ func NewServer(service *service.FibService, config config.Config) *Server {
 	}
 }
 
+// Run запускает сервер
 func (s *Server) Run(url string) error {
 	return s.router.Run(url)
 }

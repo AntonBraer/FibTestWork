@@ -17,7 +17,7 @@ func NewFibService(repo repository.FibRepository) *FibService {
 		repo: repo,
 	}
 }
-
+// GetFibSeq возвращает ряд Фибоначчи
 func (f *FibService) GetFibSeq(ctx context.Context, start, end int) (string, error) {
 	if start > end {
 		return "", fmt.Errorf("start > end")
@@ -40,6 +40,7 @@ func (f *FibService) GetFibSeq(ctx context.Context, start, end int) (string, err
 	return f.seqFilter(seq, start, end), nil
 }
 
+// calcFibSeq считает ряд Фибоначчи
 func (f *FibService) calcFibSeq(n int) []int64 {
 	fibSeq := make([]int64, n+1, n+2)
 	if n < 2 {
@@ -53,6 +54,7 @@ func (f *FibService) calcFibSeq(n int) []int64 {
 	return fibSeq
 }
 
+// seqFilter фильтрует ряд Фибоначчи
 func (f *FibService) seqFilter(fibSeq []int64, start, end int) string {
 	var strB strings.Builder
 

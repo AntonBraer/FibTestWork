@@ -8,6 +8,7 @@ type Config struct {
 	GrpcPort  string `mapstructure:"GRPC_PORT"`
 }
 
+// LoadConfig загружает конфиг из app.env
 func LoadConfig(path string) (config Config, err error) {
 	viper.AddConfigPath(path)
 	viper.SetConfigName("app")

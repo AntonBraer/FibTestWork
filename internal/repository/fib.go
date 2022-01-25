@@ -16,6 +16,7 @@ type FibRepository struct {
 	key        string
 }
 
+// NewFibRepository созадает новый репозиторий
 func NewFibRepository(redisCache *cache.Cache, redisRing *redis.Ring) *FibRepository {
 	return &FibRepository{
 		redisCache: redisCache,
@@ -24,6 +25,7 @@ func NewFibRepository(redisCache *cache.Cache, redisRing *redis.Ring) *FibReposi
 	}
 }
 
+// GetCachedFibSeq получаем кэш из редиса
 func (f *FibRepository) GetCachedFibSeq(ctx context.Context, last int) ([]int64, error) {
 	res, err := f.checkKeys(ctx, last)
 	if err != nil {
@@ -32,6 +34,7 @@ func (f *FibRepository) GetCachedFibSeq(ctx context.Context, last int) ([]int64,
 	return res, nil
 }
 
+// SetNewFibSeq записываем кэш в редис
 func (f *FibRepository) SetNewFibSeq(ctx context.Context, fibSeq []int64, last int) error {
 	item := cache.Item{
 		Ctx:   ctx,
@@ -47,6 +50,7 @@ func (f *FibRepository) SetNewFibSeq(ctx context.Context, fibSeq []int64, last i
 	return nil
 }
 
+// checkKeys проверяем есть ли ключ со значением выше и возвращаем, чтобы не считать ряд несколько раз
 func (f *FibRepository) checkKeys(ctx context.Context, last int) ([]int64, error) {
 	var res []int64
 
